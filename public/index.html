@@ -1,12 +1,57 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
-  <title>Tumblefeed</title>
+  <title>TumblFeed</title>
+  <!-- Google Fonts -->
+  <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Roboto:300,300italic,700,700italic">
+  <!-- CSS Reset -->
+  <link rel="stylesheet" href="//cdn.rawgit.com/necolas/normalize.css/master/normalize.css">
+  <!-- Milligram CSS minified -->
+  <link rel="stylesheet" href="//cdn.rawgit.com/milligram/milligram/master/dist/milligram.min.css">
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="styles.css">
 </head>
-<body>
-  <h3>work plx</h3>
 
+<body>
+  <div id="root-wrapper" class="wrapper">
+    <section class="row">
+      <div class="column">
+        <h3>TumblFeed</h3>
+        <form action="" class="row">
+          <!-- Blog name input -->
+          <div class="column">
+            <label for="blog">Blog Name</label>
+            <input type="text" placeholder="e.g. illustration.media" id="blog">
+          </div>
+
+          <!-- Tag name input -->
+          <div class="column">
+            <label for="tag">Tag</label>
+            <input type="text" placeholder="e.g. GIF" id="tag">
+          </div>
+        </form>
+        <card></card>
+      </div>
+      <div class="column">
+        <h4>Favorites:</h4>
+      </div>
+    </section>
+  </div>
+
+  <!-- Card -->
+  <div id="card" class="hide">
+    <div class="row">
+      <div class="column">
+        <h5>Supp</h5>
+      </div>
+    </div>
+  </div>
+
+  <!-- scripts -->
+  <script src="./vendor/vue.js"></script>
   <script type="text/javascript" src="script.js"></script>
 </body>
+
 </html>
