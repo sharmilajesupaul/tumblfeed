@@ -1,0 +1,27 @@
+{
+  "name": "tumblfeed",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "test": "mocha -R spec spec.js",
+    "run": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sharmilajesupaul/tumblfeed.git"
+  },
+  "author": "Sharmila Jesupaul",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/sharmilajesupaul/tumblfeed/issues"
+  },
+  "homepage": "https://github.com/sharmilajesupaul/tumblfeed#readme",
+  "dependencies": {
+    "body-parser": "^1.16.1",
+    "connect-static-file": "^1.1.2",
+    "dotenv": "^4.0.0",
+    "express": "^4.14.1",
+    "request": "^2.79.0"
+  }
+}
