@@ -5,3 +5,15 @@
 .hide {
   display: none;
 }
+
+.row.card {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.row.card > .column {
+  padding: 20px;
+  border-bottom: 1px solid lightgray;
+  border-left: 1px solid lightgray;
+}
+
