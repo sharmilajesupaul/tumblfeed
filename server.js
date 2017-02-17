@@ -11,7 +11,8 @@ app.use(bodyParser.urlencoded({
 
 app.use('/', express.static(__dirname + '/public'));
 
-app.post('/find_posts', feed.get);
+app.post('/find_posts', feed.query);
+app.get('/initial_data', feed.get);
 
 app.listen(3000, () => {
   console.log('App listening on port 3000!')

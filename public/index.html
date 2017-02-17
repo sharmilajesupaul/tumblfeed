@@ -7,9 +7,11 @@
   <!-- Google Fonts -->
   <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Roboto:300,300italic,700,700italic">
   <!-- CSS Reset -->
-  <link rel="stylesheet" href="//cdn.rawgit.com/necolas/normalize.css/master/normalize.css">
+  <link rel="stylesheet" href="./vendor/css/normalize.css">
   <!-- Milligram CSS minified -->
-  <link rel="stylesheet" href="//cdn.rawgit.com/milligram/milligram/master/dist/milligram.min.css">
+  <link rel="stylesheet" href="./vendor/css/milligram.min.css">
+  <!-- Loader -->
+  <link rel="stylesheet" href="./vendor/css/loader.css">
   <!-- Custom CSS -->
   <link rel="stylesheet" href="styles.css">
 </head>
@@ -19,38 +21,97 @@
     <section class="row">
       <div class="column">
         <h3>TumblFeed</h3>
-        <form action="" class="row">
+
+        <!-- POST Form -->
+        <form class="row" v-on:submit.prevent="queryPosts" novalidate>
           <!-- Blog name input -->
           <div class="column">
             <label for="blog">Blog Name</label>
-            <input type="text" placeholder="e.g. illustration.media" id="blog">
+            <input v-model="blog" type="text" placeholder="e.g. illustration.media" id="blog">
+
           </div>
 
           <!-- Tag name input -->
           <div class="column">
             <label for="tag">Tag</label>
-            <input type="text" placeholder="e.g. GIF" id="tag">
+            <input v-model="tag" type="text" placeholder="e.g. GIF" id="tag">
+            <button class="button button-outline pull-right" type="submit">Search</button>
           </div>
         </form>
-        <card></card>
+
+        <!-- If query error -->
+        <div class="error-message" v-if="queryError">
+          <p class="text-muted">
+            Uh oh, could not retreive posts.
+            <span v-if="blog">Are you sure the blog "{{ blog }}" exists?</span>
+          </p>
+        </div>
+
+        <!-- If no query -->
+        <div class="error-message" v-if="noQuery">
+          <p class="text-muted">
+            Please enter a blog or tag name above.
+          </p>
+          <hr />
+        </div>
+
+        <!-- Loading Icon -->
+        <div v-if="loading" class="loader">Loading...</div>
+
+        <!-- Tumblr Posts -->
+        <div class="posts">
+          <card v-for="(post, $index) in posts"
+                v-on:favorite_post="favorite"
+                v-on:unfavorite_post="unfavorite"
+                :index="$index"
+                :summary="post.summary"
+                :type="post.type"
+                :caption="post.caption"
+                :is-favorite="false"
+                :image-url="post.type === 'photo' ? post.photos[0].alt_sizes[3].url : null"
+                :body="post.body || null">
+          </card>
+        </div>
       </div>
+
+      <!-- Favorites -->
       <div class="column">
-        <h4>Favorites:</h4>
+        <h4>Favorites</h4>
+
+        <!-- Favorited Posts -->
+        <div class="posts">
+          <card v-for="(post, $index) in favorites"
+                v-on:favorite_post="favorite"
+                v-on:unfavorite_post="unfavorite"
+                :index="$index"
+                :summary="post.summary"
+                :type="post.type"
+                :caption="post.caption"
+                :image-url="post.imageUrl"
+                :is-favorite="true"
+                :body="post.body || null">
+          </card>
+        </div>
       </div>
     </section>
   </div>
 
-  <!-- Card -->
+  <!-- Card Template -->
   <div id="card" class="hide">
     <div class="row card">
       <div class="column">
-        <h5>Supp</h5>
+        <button :id="'btn_' + index" v-if="!isFavorite" v-on:click="emitFavorite" class="button pull-right" type="button">Add</button>
+        <button v-if="isFavorite" v-on:click="emitUnfavorite" class="button button-clear pull-right" type="button">Remove</button>
+        <img v-if="imageUrl" class="block-center" :src="imageUrl" alt="post-image">
+        <p v-html="body"></p>
+        <p><small>{{ summary }}</small></p>
       </div>
     </div>
   </div>
 
   <!-- scripts -->
-  <script src="./vendor/vue.js"></script>
+  <script src="./vendor/js/vue.js"></script>
+  <script src="./vendor/js/vue-resource.min.js"></script>
   <script type="text/javascript" src="script.js"></script>
 </body>
 

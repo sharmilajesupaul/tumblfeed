@@ -20,7 +20,8 @@ const createPath = (req) => {
 };
 
 const feed = {
-  get: (req, res) => {
+  // queries for blog or tag
+  query: (req, res) => {
     let postUrl = createPath(req.body);
     // makes a request to the tumblr url
     request({
@@ -33,6 +34,21 @@ const feed = {
         res.status(500).send('Something broke!')
       }
     })
+  },
+  // gets initial data from illustration.media
+  get: (req, res) => {
+    let url = 'https://api.tumblr.com/v2/blog/staff/posts?api_key=' + process.env.API_KEY;
+    // makes a request to the tumblr url
+    request({
+      url: url,
+      json: true
+    }, (error, response, body) => {
+      if (!error && response.statusCode === 200) {
+        res.send(body);
+      } else {
+        res.status(500).send('Something broke!')
+      }
+    });
   }
 }
 

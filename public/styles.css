@@ -13,7 +13,33 @@
 
 .row.card > .column {
   padding: 20px;
-  border-bottom: 1px solid lightgray;
-  border-left: 1px solid lightgray;
+  border: 1px solid lightgray;
+  border-radius: 4px;
 }
 
+.pull-right {
+  float: right;
+}
+
+.block-center {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.posts {
+  overflow: auto;
+  padding-right: 30px;
+  padding-left: 30px;
+}
+
+.button-pos,
+.button.button-pos[disabled]:hover {
+  background-color: transparent;
+  color: green;
+  border-color: transparent
+}
+
+.error-message {
+  text-align: center;
+}
