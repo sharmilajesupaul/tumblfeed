@@ -37,7 +37,7 @@ const feed = {
   },
   // gets initial data from illustration.media
   get: (req, res) => {
-    let url = 'https://api.tumblr.com/v2/blog/staff/posts?api_key=' + process.env.API_KEY;
+    let url = 'https://api.tumblr.com/v2/blog/zandraart/posts?api_key=' + process.env.API_KEY;
     // makes a request to the tumblr url
     request({
       url: url,

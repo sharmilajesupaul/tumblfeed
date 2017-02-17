@@ -67,6 +67,7 @@
                 :summary="post.summary"
                 :type="post.type"
                 :caption="post.caption"
+                :post-url="post.post_url"
                 :is-favorite="false"
                 :image-url="post.type === 'photo' ? post.photos[0].alt_sizes[3].url : null"
                 :body="post.body || null">
@@ -87,6 +88,7 @@
                 :summary="post.summary"
                 :type="post.type"
                 :caption="post.caption"
+                :post-url="post.post_url"
                 :image-url="post.imageUrl"
                 :is-favorite="true"
                 :body="post.body || null">
@@ -100,10 +102,13 @@
   <div id="card" class="hide">
     <div class="row card">
       <div class="column">
+        <a class="pull-left" :href="postUrl" target="_blank">
+          <small>Post Link</small>
+        </a>
         <button :id="'btn_' + index" v-if="!isFavorite" v-on:click="emitFavorite" class="button pull-right" type="button">Add</button>
         <button v-if="isFavorite" v-on:click="emitUnfavorite" class="button button-clear pull-right" type="button">Remove</button>
-        <img v-if="imageUrl" class="block-center" :src="imageUrl" alt="post-image">
-        <p v-html="body"></p>
+        <img v-if="imageUrl" class="block-center clear" :src="imageUrl" alt="post-image">
+        <p class="clear" v-html="body"></p>
         <p><small>{{ summary }}</small></p>
       </div>
     </div>

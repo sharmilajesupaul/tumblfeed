@@ -1,13 +1,3 @@
-function buttonClickHandler(event) {
-  console.log('handler', event);
-  var id = event.target.id;
-  var button = document.getElementById(id)
-
-  button.className = 'button button-pos pull-right';
-  button.textContent = 'added';
-  button.disabled = true;
-}
-
 // Card Component
 // - represents tumblr post
 // - I would put them in a different folder under /components but since this is a
@@ -15,10 +5,9 @@ function buttonClickHandler(event) {
 // I'm using here.
 var Card = {
   template: document.getElementById('card').innerHTML,
-  props: ['index', 'summary', 'imageUrl', 'body', 'isFavorite', 'type'],
+  props: ['index', 'summary', 'imageUrl', 'body', 'isFavorite', 'type', 'postUrl'],
   methods: {
     emitFavorite: function(event) {
-      buttonClickHandler(event);
       this.$emit('favorite_post', this);
     },
     emitUnfavorite: function() {
@@ -39,10 +28,8 @@ var Tumblr = {
   },
   query: function(app, params) {
     return app.$http.post('/find_posts', params, function(blog) {
-      console.log('blog', blog)
       return blog;
     }, function(error) {
-      console.log(error);
       return { error: true }
     });
   }
@@ -77,6 +64,7 @@ new Vue({
   },
 
   methods: {
+    // gets default posts
     fetchPosts: function() {
       // remove any errors
       this.queryError = false;
@@ -89,11 +77,14 @@ new Vue({
         }
       });
     },
+
+    // Queries posts by tag and blog name
     queryPosts: function() {
-      this.noQuery = !this.tag && !this.blog;
+      // if there is no tag or blog name, show error message
+      this.noQuery    = !this.tag && !this.blog;
       // refresh posts and show loading icon
-      this.posts = [];
-      this.loading = true;
+      this.posts      = [];
+      this.loading    = true;
       // remove any previous errors
       this.queryError = false;
 
