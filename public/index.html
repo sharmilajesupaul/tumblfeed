@@ -27,14 +27,14 @@
           <!-- Blog name input -->
           <div class="column">
             <label for="blog">Blog Name</label>
-            <input v-model="blog" type="text" placeholder="e.g. illustration.media" id="blog">
+            <input v-model.lazy="blog" type="text" placeholder="e.g. illustration.media" id="blog">
 
           </div>
 
           <!-- Tag name input -->
           <div class="column">
             <label for="tag">Tag</label>
-            <input v-model="tag" type="text" placeholder="e.g. GIF" id="tag">
+            <input v-model.lazy="tag" type="text" placeholder="e.g. GIF" id="tag">
             <button class="button button-outline pull-right" type="submit">Search</button>
           </div>
         </form>
